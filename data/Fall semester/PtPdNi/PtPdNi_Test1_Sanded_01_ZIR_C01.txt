@@ -1,0 +1,54 @@
+EC-Lab ASCII FILE
+Nb header lines : 53                          
+
+IR compensation (PEIS)
+
+Run on channel : 1 (SN 1340)
+User : 
+Electrode connection : standard
+Potential control : Ewe
+Ewe ctrl range : min = -2.50 V, max = 2.50 V
+Ewe,I filtering : 50 kHz
+Safety Limits :
+	Do not start on E overload
+Channel : Grounded
+Acquisition started on : 11/17/2025 21:32:38.517
+Technique started on : 11/17/2025 21:32:41.275
+Loaded Setting File :  C:\Users\volt\Documents\Platalytix\PtPdNi_Test4_Sanded.mps
+Saved on :
+	File : PtPdNi_Test1_Sanded_01_ZIR_C01.mpr
+	Directory : C:\Users\volt\Documents\Platalytix\
+	Host : 127.0.0.1
+Device : SP-200 (SN 0262)
+Address : USB
+EC-LAB for windows v11.60 (software)
+Internet server v11.60 (firmware)
+Command interpretor v11.60 (firmware)
+Electrode material : 
+Initial state : 
+Electrolyte : 
+Comments : 
+Cable : standard
+Electrode surface area : 0.001 cm²
+Characteristic mass : 0.001 g
+Equivalent Weight : 0.000 g/eq.
+Density : 0.000 g/cm3
+Volume (V) : 0.001 cm³
+Cycle Definition : Charge/Discharge alternance
+E (V)               -0.2000             
+vs.                 Ref                 
+f                   100.000             
+unit f              kHz                 
+Va (mV)             10.0                
+pw                  0.10                
+Na                  4                   
+E range min (V)     -2.500              
+E range max (V)     2.500               
+I Range             Auto                
+Bandwidth           8                   
+comp. level (%)     85                  
+use results         1                   
+comp. mode          Software            
+
+<I>/mA			Rwe/Ohm	time/s	
+-4.6414244E-001	0	0	4.3023520E+002	2.758481411001412E+000
