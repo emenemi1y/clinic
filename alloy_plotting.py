@@ -32,12 +32,11 @@ def find_start_line(filename):
                 break
     return start_line
 
-def create_df(filename, startline):
+def create_df(filename):
     df = pd.read_csv(
         filename,
         sep="\t",
-        header=None,
-        skiprows=startline,
+        header=find_start_line(filename)-4,
         engine="python",
         encoding="utf-8",
         encoding_errors="ignore"
@@ -52,25 +51,13 @@ pH = 14
 Ru = 4.52 # uncompensated solution resistance 
 shift = R*T/F * math.log(10) * pH
 
-root = r"C:\Users\PC\Documents\GitHub\clinic\data\Ni"
+root = r"C:\Users\PC\Documents\GitHub\clinic\data\X22.5"
 
-filebase = {'magnet': 'Ni_magnet_2_23_02_LSV_C01.txt',
-            'no magnet': 'Ni_2_23_02_LSV_C01.txt'}
-'''
-filebase = {'Pt_{22.5}Pd_{22.5}Ni_{22.5}Co_{22.5}Cr_{10}': 'Pt22.5Pd22.5Ni22.5Co22_02_LSV_C01.txt',
-            'Pt_{40}Pt_{20}Ni_{20}Co_{20}': 'Pt40Pt20Ni20Co20_polished_2-6_02_LSV_C01.txt',
-            'Pt_{20}Pd_{20}Ni_{20}Co_{40}': 'Co40_polished_2-10_02_LSV_C01.txt',
-            'Pt_{20}Pd_{40}Ni_{40}Co_{40}': 'Pd40_polished_2-10_02_LSV_C01.txt',
-            'Pt_{30}Pd_{30}Ni_{10}Co_{10}Cr_{10}': 'Ni10Co10_polished_2-10_02_LSV_C01.txt',
-            'Pt_{20}Pd_{40}Ni_{40}Co_{40}': 'Pd40_polished_2-10_02_LSV_C01.txt',
-            'X18.5': 'X18_02_LSV_C01.txt'}
-
-            'Pt': 'Pt_2-10_02_LSV_C01.txt',
-            'PtPdCo': 'PtPdCo_2-10_02_LSV_C01.txt',
-            'PtPdCoNiCrFe':'PtPdCoNiCrFe_2-10_02_LSV_C01.txt',
-            'PtPdNiCoCr': 'PtPdNiCoCr_polished_IR_02_LSV_C01.txt'}
-    '''
-
+filebase = {'side A, up': 'X225_N52magA_up_3_11_02_LSV_C01.txt',
+            'side B, up': 'X225_N52magB_up_3_11_02_LSV_C01.txt',
+            'side A, flat': 'X225_N52magA_flat_3_11_02_LSV_C01.txt',
+            'side B, flat': 'X225_N52magB_flat_3_11_02_LSV_C01.txt',
+            'no magnet': 'X22_5_2-17_02_LSV_C01.txt'}
 data = {}
 # colors = {'PtPdCo': 'lightseagreen', 'PtPdNi': 'orange', 'PtPdCoNi': 'mediumslateblue',
 #           'PtPdCoNiCr': 'deeppink', 'PtPdNiCoCrFe': 'yellowgreen', 'Pt': 'slategrey', 'Ni': 'black'}
@@ -78,23 +65,23 @@ data = {}
 plt.figure()
 for test in filebase.keys():
     file = os.path.join(root, filebase[test])
-    data[test] = create_df(file, find_start_line(file))
-    I = data[test][3]
-    if (test == 'double'): I = I / 2
-    V = data[test][2] + shift
-    plt.plot(V,I, label=f'${test}$')
+    data[test] = create_df(file)
+    I = data[test]["<I>/mA"].values
+    V = data[test]["Ewe/V"].values + shift
+    plt.plot(V,I, label=f'{test}')
     
 plt.legend()
 plt.xlabel('Potential vs. RHE')
 #plt.ylabel('Absolute current (mA)')
 plt.ylabel('Current density ($mA/cm^2$)')
 
-plt.grid()
-# plt.xlim(-0.65, 0.2)
-# plt.ylim(-500, 10)
-#plt.title("LSV curves, $Pt$")
-# plt.title("LSV curves, $Pt_{22.5}Pd_{22.5}Ni_{22.5}Co_{22.5}Cr_{10}$")
-plt.title('Ni with/without magnet')
+plt.grid() 
+plt.xlim(-0.75, 0.2)
+plt.ylim(-500, 10)
+#plt.title("LSV curves, $PtPdCoNi$")
+#plt.title("LSV curves, $Pt_{20}Pd_{20}Ni_{20}Co_{40}$")
+#plt.title('Ni with/without magnet')
+plt.title('LSV curves, X22.5, magnet tests')
 plt.show()
     
     
